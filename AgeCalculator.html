@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+margin:0;  
+padding:0;
+box-sizing:border-box;
+} 
+
+body{
+background:#7289DA; 
+font-family: 'poppins', sans-serif;
+}
+
+.container{
+padding:20px; 
+width:360px;
+border-radius:7px;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+padding-bottom:25px;
+}
+
+.container h2{
+text-align:center;
+color:#7289DA;
+white-space:nowrap;
+font-size:20px;
+}
+
+.container .details{
+width:100%;
+margin-top:20px;
+}
+
+.container .details div{
+height:70px;    
+width:105px;
+float:left;
+text-align:center;
+}
+
+.container .details div span{
+color:#7289DA;        
+}
+
+.container .details div input{
+all:unset;   
+height:30px;
+width:80px;
+border:1px solid black;
+border-radius:3px;
+margin-top:2px;
+}
+
+.container .submit-btn{
+all:unset;  
+height:35px;
+width:100px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#7289DA; 
+color:white;
+border-radius:7px;
+margin:auto;
+margin-top:40px;
+cursor:pointer;
+position:relative;
+top:5px;
+}
+
+.container .result{
+margin-top:25px;   
+color:#7289DA;
+text-align:center;
+display:none;
+}
+
+::selection{
+background:#7289DA; 
+color:white;
+}
+</style>        
+</head>
+
+<body>
+<div class="container">
+    <h2>Age Calculator</h2>   
+  <div class="details">
+    <div class="date">
+       <span>Date</span>  
+       <input type="text" placeholder="0">
+    </div>
+    <div class="month">
+            <span>Month</span>
+            <input type="text" placeholder="0">
+    </div> 
+    <div class="year">
+            <span>Year</span>
+            <input type="text" placeholder="0">
+    </div>
+</div>
+<button class="submit-btn">Submit</button>
+<p class="result">Your age is 23 Years 4 Months 27 Days</p>
+ </div>
+<script>
+let container = document.querySelector('.container');
+let dateInput = container.querySelector('.details .date input');
+let monthInput = container.querySelector('.details .month input');
+let yearInput = container.querySelector('.details .year input');
+let submitBtn = container.querySelector('.submit-btn');
+
+let result = () => {
+        let d1 = dateInput.value;
+        let m1 = monthInput.value;
+        let y1 = yearInput.value;
+
+        let date = new Date();
+        let d2 = date.getDate();
+        let m2 = 1 + date.getMonth();
+        let y2 = date.getFullYear();
+
+        let month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+        if (d1 > d2) {
+                d2 = d2 + month[m2 - 1];
+                m2 = m2 - 1;
+        }
+        if (m1 > m2) {
+                m2 = m2 + 12;
+                y2 = y2 - 1;
+        }
+        let d = d2 - d1;
+        let m = m2 - m1;
+        let y = y2 - y1;
+
+        container.querySelector('.result').style.display = 'block';
+        container.querySelector('.result').innerHTML = `Your age is ${y} Years ${m} Months ${d} Days`;
+}
+
+submitBtn.addEventListener('click',result);
+</script>
+</body>
+
+</html>
